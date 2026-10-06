@@ -1,0 +1,14 @@
+{
+  "name": "timecalc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TimeCalc — build script for generating SEO pages",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "npx serve dist",
+    "watch": "node build.js --watch"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

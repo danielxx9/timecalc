@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-contrast="normal" data-fontsize="md">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Timesheet Rounding Calculator — Compare Rounding Rules</title>
+<meta name="description" content="Compare an exact duration against common timesheet rounding rules. Free online rounding calculator.">
+<meta name="keywords" content="time duration calculator, time calculator, hours calculator, minutes calculator, time difference calculator, work hours calculator, timesheet calculator, overtime calculator, meeting cost calculator, shift calculator, time zone converter">
+<meta name="author" content="TimeCalc">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://timecalc.example.com/timesheet-rounding/">
+<link rel="alternate" hreflang="en" href="https://timecalc.example.com/">
+<link rel="alternate" hreflang="x-default" href="https://timecalc.example.com/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TimeCalc">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://timecalc.example.com/timesheet-rounding/">
+<meta property="og:title" content="Timesheet Rounding Calculator — Compare Rounding Rules">
+<meta property="og:description" content="Compare an exact duration against common timesheet rounding rules. Free online rounding calculator.">
+<meta property="og:site_name" content="TimeCalc">
+<meta property="og:image" content="https://timecalc.example.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Timesheet Rounding Calculator — Compare Rounding Rules">
+<meta name="twitter:description" content="Compare an exact duration against common timesheet rounding rules. Free online rounding calculator.">
+<meta name="twitter:image" content="https://timecalc.example.com/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='white' stroke-width='2.5'/%3E%3Cpath d='M16 10v6l4 3' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebApplication", "@id": "https://timecalc.example.com/#webapp", "name": "TimeCalc", "url": "https://timecalc.example.com/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any modern browser", "description": "Free online time duration calculator for elapsed time, work hours, breaks, overtime, timesheets, meeting costs, date differences and time zone conversion.", "inLanguage": "en", "isAccessibleForFree": true, "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
+    { "@type": "WebSite", "@id": "https://timecalc.example.com/#website", "url": "https://timecalc.example.com/", "name": "TimeCalc", "inLanguage": "en" },
+    { "@type": "FAQPage", "@id": "https://timecalc.example.com/#faq", "mainEntity": [
+      { "@type": "Question", "name": "How do I calculate time duration between two times?", "acceptedAnswer": { "@type": "Answer", "text": "Enter the start time and end time. The calculator subtracts the start from the end and returns the elapsed duration in hours, minutes and seconds." } },
+      { "@type": "Question", "name": "Can this calculator handle overnight shifts?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. If the end time is earlier than the start time on the same date, the calculator treats it as an overnight shift and adds 24 hours." } },
+      { "@type": "Question", "name": "How do I calculate work hours with breaks?", "acceptedAnswer": { "@type": "Answer", "text": "Use the Work Hours calculator. Enter clock-in and clock-out times, then add any paid or unpaid breaks." } },
+      { "@type": "Question", "name": "How do I convert minutes to decimal hours?", "acceptedAnswer": { "@type": "Answer", "text": "Divide the minutes by 60. For example, 30 minutes is 0.5 hours." } },
+      { "@type": "Question", "name": "How are time zones handled?", "acceptedAnswer": { "@type": "Answer", "text": "The Time Zone Converter uses the browser's built-in Intl APIs with IANA time zone identifiers." } },
+      { "@type": "Question", "name": "Is my data stored online?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every calculation runs in your browser." } }
+    ] }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.__TIMECALC_DEFAULT__ = "rounding";</script>
+</head>
+<body>
+<a class="skip-link" href="#workspace">Skip to calculator</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="TimeCalc home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      </span>
+      <span class="brand-text">Time<b>Calc</b></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Calculator categories">
+      <ul class="nav-list" id="mainNavList"></ul>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="donate-header-btn" id="donateBtn" aria-label="Support TimeCalc">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span>Support</span>
+      </button>
+      <button type="button" class="icon-btn" id="paletteBtn" aria-label="Command palette" title="Command palette (Ctrl+K)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 9h6v6H9zM5 5h14v14H5z"/></svg>
+      </button>
+      <button type="button" class="icon-btn" id="searchBtn" aria-label="Search calculators" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      </button>
+      <button type="button" class="icon-btn" id="settingsBtn" aria-label="Appearance settings" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>
+      </button>
+      <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+      <div class="settings-pop" id="settingsPop" hidden>
+        <h3>Appearance</h3>
+        <div class="setting-row">
+          <label>Theme</label>
+          <div class="seg" id="themeSeg">
+            <button type="button" data-theme-set="system">System</button>
+            <button type="button" data-theme-set="light">Light</button>
+            <button type="button" data-theme-set="dark">Dark</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <label>Contrast</label>
+          <div class="seg" id="contrastSeg">
+            <button type="button" data-contrast-set="normal">Normal</button>
+            <button type="button" data-contrast-set="high">High</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <label>Text size</label>
+          <div class="seg" id="fontSeg">
+            <button type="button" data-font-set="sm">S</button>
+            <button type="button" data-font-set="md">M</button>
+            <button type="button" data-font-set="lg">L</button>
+          </div>
+        </div>
+        <div class="setting-row" style="flex-direction: column; align-items: stretch; gap: 6px;">
+          <label for="localeSelect" style="font-size:.82rem;">Locale</label>
+          <select id="localeSelect" class="locale-select" aria-label="Locale">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="en-IN">English (India)</option>
+            <option value="de-DE">Deutsch (Deutschland)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-bar" id="searchBar" hidden>
+    <div class="wrap search-bar-inner">
+      <label class="sr-only" for="globalSearch">Search a calculator</label>
+      <input type="search" id="globalSearch" class="input" placeholder="Search a calculator..." autocomplete="off" spellcheck="false">
+      <ul class="search-results" id="searchResults" hidden></ul>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" hidden></div>
+</header>
+
+<main id="main">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="wrap">
+      <ol>
+        <li><a href="#top">Home</a></li>
+        <li aria-current="page">Timesheet Rounding Calculator</li>
+      </ol>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Timesheet Rounding Calculator</h1>
+      <p class="lede">Compare an exact duration against every common rounding rule at once. See the difference each rule introduces.</p>
+      <div class="hero-search">
+        <label class="sr-only" for="heroSearch">Search a calculator</label>
+        <input type="search" id="heroSearch" class="input" placeholder="Search a calculator (duration, overtime, meeting cost...)" autocomplete="off" spellcheck="false">
+        <ul class="search-results" id="heroSearchResults" hidden></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="workspace" aria-labelledby="calcTitle">
+    <div class="wrap workspace-grid">
+      <div class="panel calc-panel">
+        <div class="panel-head">
+          <p class="breadcrumb" id="calcBreadcrumb"></p>
+          <h2 id="calcTitle">Time Duration Calculator</h2>
+          <p class="panel-desc" id="calcDesc">Calculate the elapsed time between two times or two dates.</p>
+        </div>
+        <form id="calcForm" class="calc-body" novalidate autocomplete="off"></form>
+      </div>
+
+      <aside class="panel result-panel" id="resultPanel" aria-labelledby="resultHeading">
+        <div class="panel-head result-head">
+          <h2 id="resultHeading">Result</h2>
+          <div style="display:flex;gap:6px;align-items:center">
+            <span class="badge" id="resultBadge" hidden></span>
+            <button type="button" class="icon-btn" id="fullscreenBtn" aria-label="Toggle fullscreen result" title="Fullscreen" style="width:30px;height:30px">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="alert alert-danger" id="resultError" role="alert" hidden></div>
+        <div class="alert alert-info" id="liveNotice" role="status" hidden></div>
+        <p class="primary-result" id="primaryResult" aria-live="polite">&mdash;</p>
+        <p class="result-sub" id="resultSub"></p>
+        <div class="meta-grid" id="resultMeta" hidden></div>
+        <div class="recent-strip" id="recentStrip" hidden>
+          <h3>Recent results</h3>
+          <ul id="recentList"></ul>
+        </div>
+        <div class="chart-wrap" id="chartWrap" hidden>
+          <button type="button" class="section-toggle" data-toggle="chart" aria-expanded="true">Breakdown</button>
+          <div class="section-body" id="chartBody"></div>
+        </div>
+        <div class="timeline-wrap" id="timelineWrap" hidden>
+          <button type="button" class="section-toggle" data-toggle="timeline" aria-expanded="true">Timeline</button>
+          <div class="section-body" id="timelineBody"></div>
+        </div>
+        <div class="breakdown-wrap" id="breakdownWrap" hidden>
+          <button type="button" class="section-toggle" data-toggle="breakdown" aria-expanded="true">Calculation breakdown</button>
+          <div class="section-body" id="breakdownBody"></div>
+        </div>
+        <div class="warnings" id="warningsWrap" hidden></div>
+        <div class="disclaimer" id="disclaimer" hidden></div>
+        <details class="how-details" id="howDetails" hidden>
+          <summary>How this was calculated</summary>
+          <pre id="howPre"></pre>
+        </details>
+        <div class="result-actions">
+          <label class="sr-only" for="copyFormat">Copy format</label>
+          <select id="copyFormat" class="input input-sm">
+            <option value="plain">Plain text</option>
+            <option value="formatted">Formatted</option>
+            <option value="detailed" selected>Detailed</option>
+          </select>
+          <button type="button" class="btn" data-result-action="copy">Copy</button>
+          <button type="button" class="btn" data-result-action="save">Save</button>
+          <button type="button" class="btn" data-result-action="print">Print</button>
+          <button type="button" class="btn" data-result-action="image">Export image</button>
+          <button type="button" class="btn" data-result-action="embed">Embed</button>
+          <button type="button" class="btn" data-result-action="ics" id="icsBtn" hidden>Add to calendar</button>
+          <button type="button" class="btn" data-result-action="share">Share</button>
+          <button type="button" class="btn btn-ghost" data-result-action="reset">Reset</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="tools" aria-labelledby="toolsHeading">
+    <div class="wrap">
+      <h2 id="toolsHeading">Other calculators</h2>
+      <p class="section-lede">Twenty-five focused tools share one interface. The default duration calculator answers simple questions quickly; specialist tools cover work hours, timesheets, overtime, shifts, meeting costs, business days, age, sleep cycles and time zone conversion.</p>
+      <div class="strip" id="favoritesStrip" hidden>
+        <div class="strip-head"><h3>Favourites</h3></div>
+        <div class="strip-list" id="favoritesList"></div>
+      </div>
+      <div class="strip" id="recentsStrip" hidden>
+        <div class="strip-head"><h3>Recently used</h3></div>
+        <div class="strip-list" id="recentsList"></div>
+      </div>
+      <div class="tool-grid" id="toolGrid"></div>
+    </div>
+  </section>
+
+  
+
+  <section class="section" id="library" aria-labelledby="libraryHeading">
+    <div class="wrap">
+      <h2 id="libraryHeading">History and saved calculations</h2>
+      <p class="section-lede">Everything here is stored only in this browser. Nothing is ever sent to a server.</p>
+      <div class="tabs" role="tablist" aria-label="History and saved calculations">
+        <button type="button" class="tab is-active" role="tab" id="tabHistory" aria-selected="true" aria-controls="panelHistory" data-tab="history">Recent calculations</button>
+        <button type="button" class="tab" role="tab" id="tabSaved" aria-selected="false" aria-controls="panelSaved" data-tab="saved">Saved</button>
+      </div>
+      <div class="tab-panel" id="panelHistory" role="tabpanel" aria-labelledby="tabHistory">
+        <div class="library-toolbar">
+          <label class="sr-only" for="historySearch">Search history</label>
+          <input type="search" id="historySearch" class="input" placeholder="Search history..." autocomplete="off">
+          <label class="sr-only" for="historyFilter">Filter by calculator</label>
+          <select id="historyFilter" class="input"><option value="">All calculators</option></select>
+          <button type="button" class="btn btn-ghost" id="exportHistory">Export JSON</button>
+          <button type="button" class="btn btn-ghost" id="clearHistory">Clear history</button>
+        </div>
+        <div id="historyListWrap"></div>
+        <p class="empty-state" id="historyEmpty">No calculations yet.</p>
+      </div>
+      <div class="tab-panel" id="panelSaved" role="tabpanel" aria-labelledby="tabSaved" hidden>
+        <div class="library-toolbar">
+          <button type="button" class="btn btn-ghost" id="exportSaved">Export all (JSON)</button>
+          <button type="button" class="btn btn-ghost" id="importSaved">Import JSON</button>
+          <input type="file" id="importFile" accept="application/json,.json" hidden>
+        </div>
+        <div id="savedListWrap"></div>
+        <p class="empty-state" id="savedEmpty">Nothing saved yet.</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  <section class="section" id="about" aria-labelledby="aboutHeading">
+    <div class="wrap prose-grid">
+      <div>
+        <h2 id="aboutHeading">How the calculators work</h2>
+        <p>Times and dates are normalised into a consistent representation, then the requested operation is applied. Results are converted into hours, minutes, seconds, decimal hours and other useful formats.</p>
+        <ol class="steps"><li>Enter the time or date values.</li><li>The inputs are normalised.</li><li>The difference or operation is computed.</li><li>The result is shown in multiple formats.</li></ol>
+      </div>
+      <div>
+        <h2>Common uses</h2>
+        <ul class="tag-list">
+          <li>Work shifts</li><li>Employee timesheets</li><li>Payroll preparation</li><li>Freelance billing</li>
+          <li>Project tracking</li><li>Overtime calculations</li><li>Meeting cost analysis</li><li>Travel durations</li>
+          <li>Meeting planning</li><li>International scheduling</li><li>Event countdowns</li><li>Time conversion</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faqHeading">
+  <div class="wrap narrow">
+    <h2 id="faqHeading">Frequently asked questions</h2>
+    <details class="faq-item"><summary>Why does my employer round times?</summary><p>Rounding simplifies payroll processing and reduces disputes over exact minutes. Rules vary by employer and country.</p></details>
+      <details class="faq-item"><summary>Which rule is most common?</summary><p>The nearest 6 minutes matches decimal hours exactly and is common in the US. The 15-minute rule is also widespread.</p></details>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Popular calculators</h3>
+        <ul>
+          <li><button type="button" data-goto-calc="duration">Time Duration</button></li>
+          <li><button type="button" data-goto-calc="work-hours">Work Hours</button></li>
+          <li><button type="button" data-goto-calc="timesheet">Timesheet</button></li>
+          <li><button type="button" data-goto-calc="overtime">Overtime</button></li>
+          <li><button type="button" data-goto-calc="meeting-cost">Meeting Cost</button></li>
+          <li><button type="button" data-goto-calc="timezone">Time Zone Converter</button></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Date tools</h3>
+        <ul>
+          <li><button type="button" data-goto-calc="date-difference">Date Difference</button></li>
+          <li><button type="button" data-goto-calc="business-days">Business Days</button></li>
+          <li><button type="button" data-goto-calc="age">Age Calculator</button></li>
+          <li><button type="button" data-goto-calc="pay-period">Pay Period</button></li>
+          <li><button type="button" data-goto-calc="world-clock">World Clock</button></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Guides</h3>
+        <ul>
+          <li><a href="#learn">All guides</a></li>
+          <li><a href="#learn">Working hours per month</a></li>
+          <li><a href="#learn">Decimal hours chart</a></li>
+          <li><a href="#learn">Excel timesheet guide</a></li>
+          <li><a href="#learn">Rounding rules by country</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#guide">Guide to time calculation</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#about">How the calculators work</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-donate">
+      <div class="footer-donate-text">
+        <h3>TimeCalc is free and ad-free</h3>
+        <p>No trackers, no sign-up walls, no premium tiers. If it saved you time, you can keep it that way with a small tip.</p>
+      </div>
+      <button type="button" class="donate-header-btn" id="footerDonateBtn" aria-label="Support TimeCalc">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Support this tool
+      </button>
+    </div>
+
+    <div class="footer-bottom">
+      <p>TimeCalc runs entirely in your browser. No accounts, no tracking, no external requests. Check your local pay and overtime rules before relying on results for payroll.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-bar" id="mobileBar">
+  <button type="button" class="btn btn-primary" id="mobileCalcBtn">Calculate</button>
+</div>
+
+<div class="palette-backdrop" id="paletteBackdrop" hidden>
+  <div class="palette" role="dialog" aria-label="Command palette">
+    <input type="search" id="paletteInput" class="palette-input" placeholder="Jump to a calculator or run a command..." autocomplete="off" spellcheck="false">
+    <ul class="palette-list" id="paletteList"></ul>
+  </div>
+</div>
+
+<div class="embed-modal-backdrop" id="embedBackdrop" hidden>
+  <div class="embed-modal" role="dialog" aria-labelledby="embedTitle">
+    <div class="embed-modal-head">
+      <h3 id="embedTitle">Embed this calculator</h3>
+      <button type="button" id="embedClose" aria-label="Close">×</button>
+    </div>
+    <div class="embed-modal-body">
+      <p>Copy the code below to place this calculator on any website. The widget runs entirely in the visitor's browser and sends no data anywhere.</p>
+      <label for="embedCode">HTML embed code</label>
+      <textarea id="embedCode" readonly rows="5"></textarea>
+      <div class="embed-preview"><strong>How it appears:</strong> a responsive iframe sized to fit the calculator. Recommended minimum width is 320&nbsp;px.</div>
+    </div>
+    <div class="embed-modal-foot">
+      <button type="button" class="btn btn-ghost" id="embedCancel">Close</button>
+      <button type="button" class="btn btn-primary" id="embedCopy">Copy code</button>
+    </div>
+  </div>
+</div>
+
+<div class="donate-backdrop" id="donateBackdrop" hidden>
+  <div class="donate-modal" role="dialog" aria-labelledby="donateTitle">
+    <button type="button" class="donate-close" id="donateClose" aria-label="Close">×</button>
+    <div class="donate-hero">
+      <div class="donate-hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <h2 id="donateTitle">Support TimeCalc</h2>
+      <p>Every calculator runs entirely in your browser, with no ads, no tracking and no accounts. If it saved you a few minutes today, a small tip keeps it that way.</p>
+    </div>
+    <div class="donate-body">
+      <div class="donate-section">
+        <h3>Choose an amount</h3>
+        <div class="donate-amounts" id="donateAmounts">
+          <button type="button" class="donate-amount" data-amount="3">$3<small>Coffee</small></button>
+          <button type="button" class="donate-amount is-active" data-amount="5">$5<small>Standard</small></button>
+          <button type="button" class="donate-amount" data-amount="10">$10<small>Generous</small></button>
+          <button type="button" class="donate-amount" data-amount="25">$25<small>Superstar</small></button>
+        </div>
+        <div class="donate-custom-wrap">
+          <span class="donate-currency" id="donateCurrency">$</span>
+          <input type="number" class="donate-custom" id="donateCustom" placeholder="Or enter a custom amount" min="1" step="1" inputmode="decimal">
+        </div>
+      </div>
+      <div class="donate-section">
+        <h3>Pick a platform</h3>
+        <div class="donate-platforms">
+          <a class="donate-platform" id="donateKofi" href="https://ko-fi.com/yourname" target="_blank" rel="noopener noreferrer">
+            <span class="donate-platform-icon kofi" aria-hidden="true">K</span>
+            <div class="donate-platform-main">
+              <p class="donate-platform-name">Ko-fi</p>
+              <p class="donate-platform-desc">One-off or monthly. No account needed for the giver.</p>
+            </div>
+            <span class="donate-platform-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="donate-platform" id="donateBmc" href="https://www.buymeacoffee.com/yourname" target="_blank" rel="noopener noreferrer">
+            <span class="donate-platform-icon bmc" aria-hidden="true">B</span>
+            <div class="donate-platform-main">
+              <p class="donate-platform-name">Buy Me a Coffee</p>
+              <p class="donate-platform-desc">Quick card payment. Tips and messages welcome.</p>
+            </div>
+            <span class="donate-platform-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="donate-platform" id="donatePaypal" href="https://paypal.me/yourname" target="_blank" rel="noopener noreferrer">
+            <span class="donate-platform-icon pp" aria-hidden="true">P</span>
+            <div class="donate-platform-main">
+              <p class="donate-platform-name">PayPal</p>
+              <p class="donate-platform-desc">Pay with a card or a PayPal balance.</p>
+            </div>
+            <span class="donate-platform-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="donate-platform" id="donateGithub" href="https://github.com/sponsors/yourname" target="_blank" rel="noopener noreferrer">
+            <span class="donate-platform-icon gh" aria-hidden="true">G</span>
+            <div class="donate-platform-main">
+              <p class="donate-platform-name">GitHub Sponsors</p>
+              <p class="donate-platform-desc">Monthly support for developers who prefer GitHub.</p>
+            </div>
+            <span class="donate-platform-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="donate-section">
+        <h3>Free ways to help</h3>
+        <div class="donate-other">
+          <div class="donate-other-item">
+            <span class="donate-other-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+            </span>
+            <p><strong>Share it.</strong> Send the link to a colleague who tracks hours.
+              <button type="button" id="donateShareBtn">Copy the link</button></p>
+          </div>
+          <div class="donate-other-item">
+            <span class="donate-other-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <p><strong>Star it on GitHub.</strong> A star helps other developers find the project.
+              <a href="https://github.com/yourname/timecalc" target="_blank" rel="noopener noreferrer">Open repository</a></p>
+          </div>
+          <div class="donate-other-item">
+            <span class="donate-other-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <p><strong>Send feedback.</strong> Bugs, missing calculators, or confusing wording — all welcome.
+              <a href="mailto:hello@timecalc.example.com?subject=TimeCalc%20feedback">Email us</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="donate-footer">
+      <strong>Thank you.</strong> Every contribution goes toward keeping this tool free and offline-first.
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="sr-only" aria-live="polite" id="liveRegion"></div>
+
+<script src="../assets/script.js"></script>
+</body>
+</html>
